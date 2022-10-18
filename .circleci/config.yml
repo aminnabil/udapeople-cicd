@@ -4,7 +4,7 @@ orbs:
   slack: cricleci/slack@4.9.3
 
 commands:
-  notify_on_failure
+  notify_on_failure:
     steps:
       - slack/notify
           event: fail
