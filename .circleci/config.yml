@@ -205,7 +205,7 @@ jobs:
           paths:
             - project/.circleci/ansible/inventory.txt
 
-      - destory-enviroment    
+      - destroy-environment    
 
   configure-infrastructure:
     docker:
@@ -223,7 +223,7 @@ jobs:
             cd .circleci/ansible
             cat inventory.txt
             ansible-playbook -i inventory.txt configure-server.yml
-      - destory-enviroment
+      - destroy-environment
 
   # run-migrations:
   #   docker:
