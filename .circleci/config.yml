@@ -33,6 +33,9 @@ commands:
           command: |
             curl -fsSL https://deb.nodesource.com/setup_13.x | sudo -E bash -
             sudo apt install -y nodejs
+            
+            sudo npm install -g n
+            sudo n 13.8.0
              
 #   notify_on_failure:
 #     steps:
