@@ -7,8 +7,8 @@
     
     sudo npm install -g n
     sudo n 13.8.0
-    
-- name: "Install Node.js 14"
+
+- name: "Install Node.js 13"
   become: true
   apt:
     name: ["nodejs"]
