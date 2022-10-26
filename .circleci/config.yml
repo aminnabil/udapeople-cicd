@@ -377,6 +377,7 @@ jobs:
             else
               exit 1
             fi
+
       - run:
           name: Frontend smoke test.
           command: |
@@ -390,7 +391,7 @@ jobs:
 
       # - destroy-environment
       - revert-migrations        
-      # Here's where you will add some code to rollback on failure
+      # Here's where you will add some code to rollback on failure.
 
   cloudfront-update:
     docker:
