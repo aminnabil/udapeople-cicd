@@ -26,9 +26,9 @@ Resources:
           ToPort: 3030
           CidrIp: 0.0.0.0/0
 
-      InstanceEIP:
-      Type: AWS::EC2::EIP
-      Properties:
+  InstanceEIP:
+    Type: AWS::EC2::EIP
+    Properties:
       Domain: vpc
       InstanceId: !Ref EC2Instance
 
