@@ -20,10 +20,11 @@ commands:
       - run:
           name: Install Ansible
           command: |
-            sudo apt update
-            sudo apt install software-properties-common -y
-            sudo add-apt-repository --yes --update ppa:ansible/ansible
-            sudo apt install ansible -y
+            python3 -m pip install --user ansible
+            # sudo apt update
+            # sudo apt install software-properties-common -y
+            # sudo add-apt-repository --yes --update ppa:ansible/ansible
+            # sudo apt install ansible -y
 
   install_nodejs:
     description: Install Node.js 13.8.0
@@ -57,9 +58,9 @@ commands:
           name: Destroy environments
           when: on_fail
           command: |
-           aws cloudformation delete-stack --stack-name udapeople-backend-<< parameters.Workflow_ID >>
            aws s3 rm s3://udapeople-<<parameters.Workflow_ID>> --recursive
            aws cloudformation delete-stack --stack-name udapeople-frontend-<< parameters.Workflow_ID >>
+           aws cloudformation delete-stack --stack-name udapeople-backend-<< parameters.Workflow_ID >>
 
   revert-migrations:
     description: Revert the last migration
@@ -73,6 +74,7 @@ commands:
           when: on_fail
           command: |
             SUCCESS=$(curl --insecure  https://kvdb.io/${KVDB_BUCKET}/migration_<< parameters.Workflow_ID >>)
+
             # Logic for reverting the database state
             if (( $SUCCESS == 1 ));
             then
@@ -183,7 +185,8 @@ jobs:
 
   deploy-infrastructure:
     docker:
-      - image: cimg/base:stable
+      # - image: cimg/base:stable
+      - image: cimg/python:3.10
     steps:
       - checkout
       - install_awscli
@@ -224,7 +227,8 @@ jobs:
 
   configure-infrastructure:
     docker:
-      - image: cimg/base:stable
+      # - image: cimg/base:stable
+      - image: cimg/python:3.10
     steps:
       - checkout
       - install_ansible
@@ -242,10 +246,13 @@ jobs:
 
   run-migrations:
     docker:
-      - image: cimg/node:13.8.0
+      # - image: cimg/node:13.8.0
+      - image: cimg/python:3.10
     steps:
       - checkout
       - install_awscli
+      - restore_cache:
+          keys: [backend-deps]
       - run:
           name: Run migrations
           command: |
@@ -267,13 +274,15 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image : cimg/base:stable
+      # - image : cimg/base:stable
+      - image: cimg/python:3.10
     steps:
       - checkout
       - install_awscli
       - install_nodejs
       - restore_cache:
-          keys: [frontend-deps]
+          # keys: [frontend-deps]
+          keys: [backend-deps]
       - run:
           name: Install dependencies
           command: |
@@ -301,7 +310,8 @@ jobs:
 
   deploy-backend:
     docker:
-      - image: cimg/base:stable
+      # - image: cimg/base:stable
+      - image: cimg/python:3.10
     steps:
       - checkout
       - install_awscli
