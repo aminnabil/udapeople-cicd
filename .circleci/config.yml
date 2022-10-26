@@ -185,8 +185,7 @@ jobs:
 
   deploy-infrastructure:
     docker:
-      # - image: cimg/base:stable
-      - image: cimg/python:3.10
+      - image: cimg/base:stable
     steps:
       - checkout
       - install_awscli
@@ -198,7 +197,6 @@ jobs:
               --tags project=udapeople \
               --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"
-
       - run:
           name: Ensure front-end infrastructure exist
           command: |
@@ -207,7 +205,6 @@ jobs:
               --tags project=udapeople \
               --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"
-
       - run:
           name: Add back-end ip to ansible inventory
           command: |
