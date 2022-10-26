@@ -356,7 +356,8 @@ jobs:
 
   smoke-test:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/python:3.10
+      # - image: cimg/base:stable
     steps:
       - checkout
       - install_awscli
@@ -393,7 +394,8 @@ jobs:
 
   cloudfront-update:
     docker:
-      - image: cimg/base:stable
+      - image : cimg/python:3.10
+      # - image: cimg/base:stable
     steps:
       - checkout
       - install_awscli
@@ -418,7 +420,8 @@ jobs:
 
   cleanup:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/python:3.10
+      # - image: cimg/base:stable
     steps:
       - checkout
       - install_awscli
