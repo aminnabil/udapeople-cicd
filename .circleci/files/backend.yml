@@ -13,10 +13,10 @@ Resources:
       GroupName: !Sub UdaPeople-${ID}
       GroupDescription: Allow port 9100, 22 and port 3030.
       SecurityGroupIngress:
-        # - IpProtocol: tcp
-        #   FromPort: 9100
-        #   ToPort: 9100
-        #   CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 9100
+          ToPort: 9100
+          CidrIp: 0.0.0.0/0
         - IpProtocol: tcp
           FromPort: 22
           ToPort: 22
@@ -43,3 +43,5 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub backend-${ID}
+        - Key: Project
+          Value: Udapeople
