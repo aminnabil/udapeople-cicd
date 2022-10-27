@@ -1,0 +1,3 @@
+URL01 : https://github.com/aminnabil/udapeople-cicd
+URL02 : http://udapeople-6968451.s3-website-us-east-1.amazonaws.com/#/employees
+URL03 : http://d3f3qvxm2h4jg0.cloudfront.net/
